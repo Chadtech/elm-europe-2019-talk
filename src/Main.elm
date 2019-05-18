@@ -1,6 +1,7 @@
 module Main exposing (main)
 
 import Browser
+import Browser.Events
 import Browser.Navigation as Nav
 import Json.Decode as Decode
 import Model exposing (Model)
@@ -44,7 +45,8 @@ init _ url key =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    Sub.none
+    Browser.Events.onKeyPress
+        (Decode.field "key" Msg.arrowKeyDecoder)
 
 
 
@@ -62,6 +64,14 @@ update msg model =
 
         UrlRequested _ ->
             model
+                |> CmdUtil.withNoCmd
+
+        LeftPressed ->
+            Model.digress model
+                |> CmdUtil.withNoCmd
+
+        RightPressed ->
+            Model.progress model
                 |> CmdUtil.withNoCmd
 
 

@@ -30,13 +30,14 @@ viewBody model =
             []
 
         PageDoesntExist ->
-            [ Html.p
-                []
-                [ Html.text "Wow" ]
-            ]
+            frame
+                [ Html.p
+                    []
+                    [ Html.text "This page does not exist" ]
+                ]
 
         Title ->
-            [ frame
+            frame
                 [ Html.p
                     [ Attrs.css
                         [ fontSize (px Units.size6) ]
@@ -50,12 +51,30 @@ viewBody model =
                     ]
                     [ Html.text "by Chadtech" ]
                 ]
-            ]
+
+        Theory ->
+            frame []
+
+        End ->
+            frame
+                [ Html.p
+                    [ Attrs.css
+                        [ fontSize (px Units.size6) ]
+                    ]
+                    [ Html.text "ThE End" ]
+                , Html.p
+                    [ Attrs.css
+                        [ fontSize (px Units.size6)
+                        , marginTop (px Units.size6)
+                        ]
+                    ]
+                    [ Html.text "Thank you" ]
+                ]
 
 
-frame : List (Html Msg) -> Html Msg
+frame : List (Html Msg) -> List (Html Msg)
 frame children =
-    Grid.row
+    [ Grid.row
         [ flexDirection column
         , justifyContent center
         , alignItems center
@@ -74,3 +93,4 @@ frame children =
                 ]
             ]
         ]
+    ]
