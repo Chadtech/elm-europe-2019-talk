@@ -6,8 +6,9 @@ import Html.Grid as Grid
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Attrs
 import Html.Styled.Events as Events
-import Model exposing (Model(..))
+import Model exposing (Model)
 import Msg exposing (Msg(..))
+import Slide as Slide
 import Style
 import Style.Units as Units
 import View.Card as Card
@@ -25,18 +26,18 @@ view model =
 
 viewBody : Model -> List (Html Msg)
 viewBody model =
-    case model of
-        Blank ->
+    case model.slide of
+        Slide.Blank ->
             []
 
-        PageDoesntExist ->
+        Slide.PageDoesntExist ->
             frame
                 [ Html.p
                     []
                     [ Html.text "This page does not exist" ]
                 ]
 
-        Title ->
+        Slide.Title ->
             frame
                 [ Html.p
                     [ Attrs.css
@@ -52,10 +53,10 @@ viewBody model =
                     [ Html.text "by Chadtech" ]
                 ]
 
-        Theory ->
+        Slide.Theory ->
             frame []
 
-        End ->
+        Slide.End ->
             frame
                 [ Html.p
                     [ Attrs.css

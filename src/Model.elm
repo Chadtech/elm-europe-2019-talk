@@ -1,29 +1,33 @@
 module Model exposing
-    ( Model(..)
+    ( Model
     , digress
     , init
     , progress
+    , setSlide
     )
+
+import Browser.Navigation as Nav
+import Route exposing (Route)
+import Slide exposing (Slide)
+
+
 
 --------------------------------------------------------------------------------
 -- TYPES --
 --------------------------------------------------------------------------------
 
-import Route exposing (Route)
+
+type alias Model =
+    { slide : Slide
+    , navKey : Nav.Key
+    }
 
 
-type Model
-    = Title
-    | Theory
-    | End
-      --
-    | PageDoesntExist
-    | Blank
-
-
-init : Model
-init =
-    Blank
+init : Nav.Key -> Model
+init key =
+    { slide = Slide.Blank
+    , navKey = key
+    }
 
 
 
@@ -32,39 +36,21 @@ init =
 --------------------------------------------------------------------------------
 
 
-progress : Model -> Route
+setSlide : Slide -> Model -> Model
+setSlide slide model =
+    { model | slide = slide }
+
+
+navigateTo : Model -> Route -> Cmd msg
+navigateTo model =
+    Route.goTo model.navKey
+
+
+progress : Model -> Cmd msg
 progress model =
-    case model of
-        Title ->
-            Route.Theory
-
-        Theory ->
-            Route.End
-
-        End ->
-            Route.End
-
-        PageDoesntExist ->
-            Route.Title
-
-        Blank ->
-            Route.Title
+    Route.goTo model.navKey (Slide.next model.slide)
 
 
-digress : Model -> Route
+digress : Model -> Cmd msg
 digress model =
-    case model of
-        Title ->
-            Route.Title
-
-        Theory ->
-            Route.Title
-
-        End ->
-            Route.Title
-
-        PageDoesntExist ->
-            Route.Title
-
-        Blank ->
-            Route.Title
+    Route.goTo model.navKey (Slide.prev model.slide)

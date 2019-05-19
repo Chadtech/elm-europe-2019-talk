@@ -1,14 +1,20 @@
 module Route exposing
     ( Route(..)
     , fromUrl
+    , goTo
     , toLabel
     , toUrlString
     )
 
--- TYPES --
-
+import Browser.Navigation as Nav
 import Url exposing (Url)
 import Url.Parser as Parser exposing ((</>), Parser, s, top)
+
+
+
+--------------------------------------------------------------------------------
+-- TYPES --
+--------------------------------------------------------------------------------
 
 
 type Route
@@ -62,3 +68,8 @@ parser =
         , Parser.map End (top </> s "end")
         , Parser.map Theory (top </> s "theory")
         ]
+
+
+goTo : Nav.Key -> Route -> Cmd msg
+goTo key =
+    toUrlString >> Nav.pushUrl key

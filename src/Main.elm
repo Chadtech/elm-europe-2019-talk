@@ -7,6 +7,7 @@ import Json.Decode as Decode
 import Model exposing (Model)
 import Msg exposing (Msg(..))
 import Route exposing (Route)
+import Slide
 import Url exposing (Url)
 import Util.Cmd as CmdUtil
 import View exposing (view)
@@ -32,7 +33,7 @@ main =
 
 init : Decode.Value -> Url -> Nav.Key -> ( Model, Cmd Msg )
 init _ url key =
-    Model.init
+    Model.init key
         |> handleRoute (Route.fromUrl url)
         |> CmdUtil.withNoCmd
 
@@ -45,7 +46,7 @@ init _ url key =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    Browser.Events.onKeyPress
+    Browser.Events.onKeyDown
         (Decode.field "key" Msg.arrowKeyDecoder)
 
 
@@ -57,7 +58,7 @@ subscriptions _ =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case msg of
+    case Debug.log "MSG" msg of
         RouteChanged maybeRoute ->
             handleRoute maybeRoute model
                 |> CmdUtil.withNoCmd
@@ -67,19 +68,23 @@ update msg model =
                 |> CmdUtil.withNoCmd
 
         LeftPressed ->
-            Model.digress model
-                |> CmdUtil.withNoCmd
+            ( model, Model.digress model )
 
         RightPressed ->
-            Model.progress model
-                |> CmdUtil.withNoCmd
+            ( model, Model.progress model )
 
 
 handleRoute : Maybe Route -> Model -> Model
-handleRoute route model =
+handleRoute route =
     case route of
         Nothing ->
-            Model.PageDoesntExist
+            Model.setSlide Slide.PageDoesntExist
 
         Just Route.Title ->
-            Model.Title
+            Model.setSlide Slide.Title
+
+        Just Route.Theory ->
+            Model.setSlide Slide.Theory
+
+        Just Route.End ->
+            Model.setSlide Slide.End
