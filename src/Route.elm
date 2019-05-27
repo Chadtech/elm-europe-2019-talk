@@ -2,7 +2,8 @@ module Route exposing
     ( Route(..)
     , fromUrl
     , goTo
-    , toLabel
+    , next
+    , prev
     , toUrlString
     )
 
@@ -19,7 +20,9 @@ import Url.Parser as Parser exposing ((</>), Parser, s, top)
 
 type Route
     = Title
+    | Intro
     | Theory
+    | AdditiveSynthesis
     | End
 
 
@@ -29,17 +32,79 @@ type Route
 --------------------------------------------------------------------------------
 
 
-toLabel : Route -> String
-toLabel route =
+toParser : Route -> Parser (Route -> a) a
+toParser route =
+    let
+        defaultParser : Parser (Route -> a) a
+        defaultParser =
+            Parser.map route (top </> s (toUrlString route))
+    in
     case route of
         Title ->
-            "title"
+            Parser.oneOf
+                [ Parser.map Title top
+                , defaultParser
+                ]
+
+        Intro ->
+            defaultParser
 
         Theory ->
-            "theory"
+            defaultParser
+
+        AdditiveSynthesis ->
+            defaultParser
 
         End ->
-            "end"
+            defaultParser
+
+
+prev : Route -> Route
+prev route =
+    let
+        getNextHelper : List Route -> Route
+        getNextHelper remainingRoutes =
+            case remainingRoutes of
+                first :: second :: rest ->
+                    if second == route then
+                        first
+
+                    else
+                        getNextHelper (second :: rest)
+
+                _ ->
+                    Title
+    in
+    getNextHelper allInCorrectOrder
+
+
+next : Route -> Route
+next route =
+    let
+        getNextHelper : List Route -> Route
+        getNextHelper remainingRoutes =
+            case remainingRoutes of
+                first :: second :: rest ->
+                    if first == route then
+                        second
+
+                    else
+                        getNextHelper (second :: rest)
+
+                _ ->
+                    End
+    in
+    getNextHelper allInCorrectOrder
+
+
+allInCorrectOrder : List Route
+allInCorrectOrder =
+    [ Title
+    , Intro
+    , Theory
+    , AdditiveSynthesis
+    , End
+    ]
 
 
 toUrlString : Route -> String
@@ -48,11 +113,17 @@ toUrlString route =
         Title ->
             "title"
 
+        Intro ->
+            "intro"
+
         Theory ->
             "theory"
 
+        AdditiveSynthesis ->
+            "additive-synthesis"
+
         End ->
-            "End"
+            "end"
 
 
 fromUrl : Url -> Maybe Route
@@ -62,12 +133,7 @@ fromUrl url =
 
 parser : Parser (Route -> a) a
 parser =
-    Parser.oneOf
-        [ Parser.map Title (top </> s "title")
-        , Parser.map Title top
-        , Parser.map End (top </> s "end")
-        , Parser.map Theory (top </> s "theory")
-        ]
+    Parser.oneOf <| List.map toParser allInCorrectOrder
 
 
 goTo : Nav.Key -> Route -> Cmd msg

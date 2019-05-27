@@ -1,4 +1,9 @@
-module Slide exposing (Slide(..), next, prev)
+module Slide exposing
+    ( Slide(..)
+    , fromRoute
+    , next
+    , prev
+    )
 
 import Route exposing (Route)
 
@@ -11,7 +16,9 @@ import Route exposing (Route)
 
 type Slide
     = Title
+    | Intro
     | Theory
+    | AdditiveSynthesis
     | End
       --
     | PageDoesntExist
@@ -24,39 +31,55 @@ type Slide
 --------------------------------------------------------------------------------
 
 
-next : Slide -> Route
-next slide =
+toRoute : Slide -> Route
+toRoute slide =
     case slide of
         Title ->
-            Route.Theory
+            Route.Title
+
+        Intro ->
+            Route.Intro
 
         Theory ->
-            Route.End
+            Route.Theory
+
+        AdditiveSynthesis ->
+            Route.AdditiveSynthesis
 
         End ->
             Route.End
 
+        Blank ->
+            Route.Title
+
         PageDoesntExist ->
             Route.Title
 
-        Blank ->
-            Route.Title
+
+fromRoute : Route -> Slide
+fromRoute route =
+    case route of
+        Route.Title ->
+            Title
+
+        Route.Intro ->
+            Intro
+
+        Route.Theory ->
+            Theory
+
+        Route.AdditiveSynthesis ->
+            AdditiveSynthesis
+
+        Route.End ->
+            End
+
+
+next : Slide -> Route
+next =
+    Route.next << toRoute
 
 
 prev : Slide -> Route
-prev slide =
-    case slide of
-        Title ->
-            Route.Title
-
-        Theory ->
-            Route.Title
-
-        End ->
-            Route.Title
-
-        PageDoesntExist ->
-            Route.Title
-
-        Blank ->
-            Route.Title
+prev =
+    Route.prev << toRoute

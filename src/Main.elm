@@ -75,16 +75,12 @@ update msg model =
 
 
 handleRoute : Maybe Route -> Model -> Model
-handleRoute route =
-    case route of
+handleRoute maybeRoute =
+    case maybeRoute of
         Nothing ->
             Model.setSlide Slide.PageDoesntExist
 
-        Just Route.Title ->
-            Model.setSlide Slide.Title
-
-        Just Route.Theory ->
-            Model.setSlide Slide.Theory
-
-        Just Route.End ->
-            Model.setSlide Slide.End
+        Just route ->
+            route
+                |> Slide.fromRoute
+                |> Model.setSlide
