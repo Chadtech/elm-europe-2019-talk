@@ -4,6 +4,7 @@ import Browser
 import Css exposing (..)
 import Html.Grid as Grid
 import Html.Styled as Html exposing (Html)
+import Html.Styled.Attributes as Attrs
 import Model exposing (Model)
 import Msg exposing (Msg(..))
 import Slide as Slide
@@ -21,8 +22,10 @@ view : Model -> Browser.Document Msg
 view model =
     { title = "What has excited me about audio synthesis theory"
     , body =
-        Style.globals
-            :: viewBody model
+        [ Style.globals
+        , Html.audio [ Attrs.id model.audioPlayerHtmlId ] []
+        ]
+            ++ viewBody model
             |> List.map Html.toUnstyled
     }
 
@@ -65,7 +68,9 @@ frame children =
         , padding <| px Units.size5
         ]
         [ Grid.column
-            [ flex (int 1) ]
+            [ flex (int 1)
+            , height (pct 100)
+            ]
             [ Card.view
                 [ maxWidth (px 1000)
                 , Style.center

@@ -1,5 +1,6 @@
 module Main exposing (main)
 
+import Audio
 import Browser
 import Browser.Events
 import Browser.Navigation as Nav
@@ -58,7 +59,7 @@ subscriptions _ =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case Debug.log "MSG" msg of
+    case msg of
         RouteChanged maybeRoute ->
             handleRoute maybeRoute model
                 |> CmdUtil.withNoCmd
@@ -72,6 +73,9 @@ update msg model =
 
         RightPressed ->
             ( model, Model.progress model )
+
+        PlayClicked audio ->
+            ( model, Audio.play model.audioPlayerHtmlId audio )
 
 
 handleRoute : Maybe Route -> Model -> Model

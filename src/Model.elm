@@ -19,6 +19,7 @@ import Slide exposing (Slide)
 
 type alias Model =
     { slide : Slide
+    , audioPlayerHtmlId : String
     , navKey : Nav.Key
     }
 
@@ -26,6 +27,7 @@ type alias Model =
 init : Nav.Key -> Model
 init key =
     { slide = Slide.Blank
+    , audioPlayerHtmlId = "audio-player"
     , navKey = key
     }
 
@@ -39,11 +41,6 @@ init key =
 setSlide : Slide -> Model -> Model
 setSlide slide model =
     { model | slide = slide }
-
-
-navigateTo : Model -> Route -> Cmd msg
-navigateTo model =
-    Route.goTo model.navKey
 
 
 progress : Model -> Cmd msg

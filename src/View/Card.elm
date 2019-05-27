@@ -22,13 +22,12 @@ import Browser.Events exposing (onMouseMove, onMouseUp)
 import Chadtech.Colors as Ct
 import Css exposing (..)
 import Css.Animations as Animations
-import Css.Global as Global
 import Data.Position as Position exposing (Position)
 import Html.Events.Extra.Mouse as Mouse
 import Html.Grid as Grid
-import Html.Styled as Html exposing (Attribute, Html, node)
-import Html.Styled.Attributes as Attrs exposing (css)
-import Html.Styled.Events exposing (onClick)
+import Html.Styled as Html exposing (Attribute, Html)
+import Html.Styled.Attributes as Attrs
+import Html.Styled.Events as Events
 import Json.Decode as Decode exposing (Decoder)
 import Json.Encode as Encode
 import Style as Style
@@ -142,7 +141,7 @@ update msg model =
 view : List Style -> List (Html msg) -> Html msg
 view styles =
     Html.node "card"
-        [ css
+        [ Attrs.css
             [ Css.batch styles
             , containerStyle
             ]
@@ -198,7 +197,7 @@ unfocusedHeader =
 headerContent : List (Attribute msg) -> List (Html msg) -> Html msg
 headerContent attrs =
     Html.node "card-header"
-        (css [ headerStyle ] :: attrs)
+        (Attrs.css [ headerStyle ] :: attrs)
 
 
 headerMouseEvents : List (Attribute Msg)
@@ -211,21 +210,20 @@ headerMouseEvents =
 headerTitle : String -> Html msg
 headerTitle str =
     Html.p
-        [ css [ headerTextStyle ] ]
+        [ Attrs.css [ headerTextStyle ] ]
         [ Html.text str ]
 
 
 closeButton : msg -> Html msg
 closeButton msg =
     Button.view
-        [ css
-            [ Button.styles
-            , width (px Units.size4)
+        [ Attrs.css
+            [ width (px Units.size4)
             , minWidth (px Units.size4)
             , padding zero
             , paddingBottom (px 2)
             ]
-        , onClick msg
+        , Events.onClick msg
         ]
         "x"
 
@@ -233,7 +231,7 @@ closeButton msg =
 headerCloseButton : Html msg
 headerCloseButton =
     Html.button
-        [ css [ headerCloseButtonStyle ] ]
+        [ Attrs.css [ headerCloseButtonStyle ] ]
         [ Html.text "x" ]
 
 
@@ -280,7 +278,7 @@ body children =
             , flexDirection column
             ]
             [ Html.node "card-body"
-                [ css [ bodyStyle ] ]
+                [ Attrs.css [ bodyStyle ] ]
                 children
             ]
         ]

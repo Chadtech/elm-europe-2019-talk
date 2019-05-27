@@ -25,5 +25,12 @@ function jsMsgHandler(msg) {
 	action(msg.payload);
 }
 
-//app.ports.toJs.subscribe(jsMsgHandler)
+app.ports.playAudio.subscribe(function(params){
+    var filePath = params.filePath;
+    var htmlId = params.htmlId;
+
+    var audioPlayer = document.getElementById(htmlId);
+    audioPlayer.src = filePath;
+    audioPlayer.play();
+})
 

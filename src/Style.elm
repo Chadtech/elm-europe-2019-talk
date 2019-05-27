@@ -22,6 +22,26 @@ globals =
         , fontSmoothingNone
         , hfnss
         ]
+    , Css.Global.button
+        [ hfnss
+        , fontSmoothingNone
+        , outline none
+        , minWidth (px Units.size6)
+        , height (px Units.size4)
+        , boxSizing borderBox
+        , padding2 zero (px Units.size3)
+        , cursor pointer
+        , outdent
+        , backgroundColor Ct.content1
+        , color Ct.content4
+        , hover
+            [ color Ct.content5
+            ]
+        , active
+            [ color Ct.content5
+            , indent
+            ]
+        ]
     , Css.Global.body
         [ backgroundColor Ct.background1 ]
     , Css.Global.everything

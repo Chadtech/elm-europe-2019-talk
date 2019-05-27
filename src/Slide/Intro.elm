@@ -3,9 +3,9 @@ module Slide.Intro exposing (view)
 import Css exposing (..)
 import Html.Grid as Grid
 import Html.Styled as Html exposing (Html)
-import Html.Styled.Attributes as Attr
 import Style.Units as Units
 import View.Helpers as View
+import View.Image as Image
 
 
 
@@ -33,12 +33,9 @@ view =
             [ padding (px Units.size4)
             , maxWidth (px Units.size8)
             ]
-            [ Html.img
-                [ Attr.src "./humio.png"
-                , Attr.css
-                    [ width (pct 100) ]
-                ]
+            [ Image.view
                 []
+                Image.Humio
             ]
         ]
     ]

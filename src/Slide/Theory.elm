@@ -16,7 +16,7 @@ view =
             "What do I mean by a theory of Audio?"
         ]
     , View.line
-        [ fontSize <| px Units.size6 ]
+        [ fontSize <| px Units.size5 ]
         """
         A model for thinking and talking about sounds
         that would make you better at handling sounds,

@@ -1,8 +1,10 @@
 module Msg exposing
     ( Msg(..)
     , arrowKeyDecoder
+    , playClicked
     )
 
+import Audio exposing (Audio)
 import Browser exposing (UrlRequest)
 import Json.Decode as Decode exposing (Decoder)
 import Route exposing (Route)
@@ -19,6 +21,12 @@ type Msg
     | UrlRequested UrlRequest
     | LeftPressed
     | RightPressed
+    | PlayClicked Audio
+
+
+playClicked : Audio -> Msg
+playClicked =
+    PlayClicked
 
 
 
