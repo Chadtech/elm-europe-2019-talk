@@ -100,7 +100,8 @@ next route =
 allInCorrectOrder : List Route
 allInCorrectOrder =
     [ Title
-    , Intro
+
+    -- , Intro
     , Theory
     , AdditiveSynthesis
     , End

@@ -13,7 +13,7 @@ view =
         [ marginBottom <| px Units.size5 ]
         [ View.words
             [ fontSize <| px Units.size6 ]
-            "What do I mean by a theory of Audio?"
+            "What do I mean by a theory of audio?"
         ]
     , View.line
         [ fontSize <| px Units.size5 ]
