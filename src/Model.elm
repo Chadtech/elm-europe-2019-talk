@@ -1,6 +1,8 @@
 module Model exposing
     ( Model
     , digress
+    , formattedTime
+    , incrementSecond
     , init
     , progress
     , setSlide
@@ -21,6 +23,7 @@ type alias Model =
     { slide : Slide
     , audioPlayerHtmlId : String
     , navKey : Nav.Key
+    , time : Int
     }
 
 
@@ -29,6 +32,7 @@ init key =
     { slide = Slide.Blank
     , audioPlayerHtmlId = "audio-player"
     , navKey = key
+    , time = 0
     }
 
 
@@ -36,6 +40,11 @@ init key =
 --------------------------------------------------------------------------------
 -- HELPERS --
 --------------------------------------------------------------------------------
+
+
+incrementSecond : Model -> Model
+incrementSecond model =
+    { model | time = model.time + 1 }
 
 
 setSlide : Slide -> Model -> Model
@@ -51,3 +60,20 @@ progress model =
 digress : Model -> Cmd msg
 digress model =
     Route.goTo model.navKey (Slide.prev model.slide)
+
+
+formattedTime : Model -> String
+formattedTime { time } =
+    [ String.fromInt (time // 60)
+    , doubleDigits <| String.fromInt <| modBy 60 time
+    ]
+        |> String.join ":"
+
+
+doubleDigits : String -> String
+doubleDigits str =
+    if String.length str == 1 then
+        "0" ++ str
+
+    else
+        str

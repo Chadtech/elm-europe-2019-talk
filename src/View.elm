@@ -37,30 +37,30 @@ viewBody model =
             []
 
         Slide.PageDoesntExist ->
-            frame
+            frame model
                 [ Html.p
                     []
                     [ Html.text "This page does not exist" ]
                 ]
 
         Slide.Title ->
-            frame Title.view
+            frame model Title.view
 
         Slide.Intro ->
-            frame Intro.view
+            frame model Intro.view
 
         Slide.Theory ->
-            frame Theory.view
+            frame model Theory.view
 
         Slide.AdditiveSynthesis ->
-            frame AdditiveSynthesis.view
+            frame model AdditiveSynthesis.view
 
         Slide.End ->
-            frame End.view
+            frame model End.view
 
 
-frame : List (Html Msg) -> List (Html Msg)
-frame children =
+frame : Model -> List (Html Msg) -> List (Html Msg)
+frame model children =
     [ Grid.row
         [ flexDirection column
         , justifyContent center
@@ -77,8 +77,22 @@ frame children =
                 , flex (int 1)
                 ]
                 [ Card.body
-                    children
+                    [ Grid.row
+                        [ flexDirection column ]
+                        children
+                    , timeView model
+                    ]
                 ]
             ]
         ]
     ]
+
+
+timeView : Model -> Html Msg
+timeView model =
+    Grid.row
+        []
+        [ Html.p
+            [ Attrs.css [ fontSize <| px Units.size5 ] ]
+            [ Html.text <| "time = " ++ Model.formattedTime model ]
+        ]

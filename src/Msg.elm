@@ -22,6 +22,7 @@ type Msg
     | LeftPressed
     | RightPressed
     | PlayClicked Audio
+    | SecondElapsed
 
 
 playClicked : Audio -> Msg

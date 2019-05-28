@@ -272,28 +272,28 @@ headerStyle =
 body : List (Html msg) -> Html msg
 body children =
     Grid.row
-        []
+        [ flex (int 1)
+        , height (pct 100)
+        ]
         [ Grid.column
             [ padding (px Units.size1)
             , flexDirection column
             ]
             [ Html.node "card-body"
-                [ Attrs.css [ bodyStyle ] ]
+                [ Attrs.css
+                    [ boxSizing borderBox
+                    , backgroundColor Ct.content1
+                    , flex2 (int 0) (int 1)
+                    , flexBasis auto
+                    , displayFlex
+                    , flexDirection column
+                    , height (pct 100)
+                    , justifyContent spaceBetween
+                    ]
+                ]
                 children
             ]
         ]
-
-
-bodyStyle : Style
-bodyStyle =
-    [ boxSizing borderBox
-    , backgroundColor Ct.content1
-    , flex2 (int 0) (int 1)
-    , flexBasis auto
-    , displayFlex
-    , flexDirection column
-    ]
-        |> Css.batch
 
 
 encode : Model -> Encode.Value

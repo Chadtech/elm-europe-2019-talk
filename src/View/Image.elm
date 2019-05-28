@@ -39,9 +39,6 @@ view : List Style -> Image -> Html msg
 view styles image =
     Html.img
         [ Attrs.src <| "./" ++ toFilePathBase image ++ ".png"
-        , Attrs.css
-            [ width (pct 100)
-            , Css.batch styles
-            ]
+        , Attrs.css styles
         ]
         []

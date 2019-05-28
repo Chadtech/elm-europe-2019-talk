@@ -25,7 +25,9 @@ view =
         []
         "The theory that all sounds are just combinations of sine waves"
     , Grid.row
-        [ justifyContent center ]
+        [ justifyContent center
+        , height (pct 50)
+        ]
         [ Image.view
             [ width (pct 60) ]
             Image.SineWaveDemo

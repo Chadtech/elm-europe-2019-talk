@@ -9,6 +9,7 @@ import Model exposing (Model)
 import Msg exposing (Msg(..))
 import Route exposing (Route)
 import Slide
+import Time
 import Url exposing (Url)
 import Util.Cmd as CmdUtil
 import View exposing (view)
@@ -47,8 +48,11 @@ init _ url key =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    Browser.Events.onKeyDown
+    [ Browser.Events.onKeyDown
         (Decode.field "key" Msg.arrowKeyDecoder)
+    , Time.every 1000 (always SecondElapsed)
+    ]
+        |> Sub.batch
 
 
 
@@ -76,6 +80,11 @@ update msg model =
 
         PlayClicked audio ->
             ( model, Audio.play model.audioPlayerHtmlId audio )
+
+        SecondElapsed ->
+            model
+                |> Model.incrementSecond
+                |> CmdUtil.withNoCmd
 
 
 handleRoute : Maybe Route -> Model -> Model

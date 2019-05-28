@@ -28,11 +28,11 @@ view =
             ]
         ]
     , Grid.row
-        [ justifyContent center ]
+        [ justifyContent center
+        , flexDirection row
+        ]
         [ Grid.column
-            [ padding (px Units.size4)
-            , maxWidth (px Units.size8)
-            ]
+            [ flex none ]
             [ Image.view
                 []
                 Image.Humio
