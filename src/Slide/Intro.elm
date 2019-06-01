@@ -3,7 +3,6 @@ module Slide.Intro exposing (view)
 import Css exposing (..)
 import Html.Grid as Grid
 import Html.Styled as Html exposing (Html)
-import Style.Units as Units
 import View.Helpers as View
 import View.Image as Image
 

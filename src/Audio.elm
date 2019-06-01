@@ -14,6 +14,8 @@ import Json.Encode as Encode
 
 type Audio
     = SineWaveDemo
+    | IdealFlute
+    | IdealFluteSineWave
 
 
 
@@ -22,11 +24,22 @@ type Audio
 --------------------------------------------------------------------------------
 
 
-toFilePath : Audio -> String
-toFilePath audio =
+toFilePathBase : Audio -> String
+toFilePathBase audio =
     case audio of
         SineWaveDemo ->
-            "./sine-wave-demo.mp3"
+            "sine-wave-demo"
+
+        IdealFlute ->
+            "ideal-flute"
+
+        IdealFluteSineWave ->
+            "flute-tone"
+
+
+toFilePath : Audio -> String
+toFilePath audio =
+    "./" ++ toFilePathBase audio ++ ".mp3"
 
 
 play : String -> Audio -> Cmd msg

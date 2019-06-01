@@ -23,6 +23,7 @@ type Route
     | Intro
     | Theory
     | AdditiveSynthesis
+    | Flutes
     | End
 
 
@@ -46,16 +47,7 @@ toParser route =
                 , defaultParser
                 ]
 
-        Intro ->
-            defaultParser
-
-        Theory ->
-            defaultParser
-
-        AdditiveSynthesis ->
-            defaultParser
-
-        End ->
+        _ ->
             defaultParser
 
 
@@ -100,10 +92,10 @@ next route =
 allInCorrectOrder : List Route
 allInCorrectOrder =
     [ Title
-
-    -- , Intro
+    , Intro
     , Theory
     , AdditiveSynthesis
+    , Flutes
     , End
     ]
 
@@ -122,6 +114,9 @@ toUrlString route =
 
         AdditiveSynthesis ->
             "additive-synthesis"
+
+        Flutes ->
+            "flutes"
 
         End ->
             "end"

@@ -10,6 +10,7 @@ import Msg exposing (Msg(..))
 import Slide as Slide
 import Slide.AdditiveSynthesis as AdditiveSynthesis
 import Slide.End as End
+import Slide.Flutes as Flutes
 import Slide.Intro as Intro
 import Slide.Theory as Theory
 import Slide.Title as Title
@@ -54,6 +55,9 @@ viewBody model =
 
         Slide.AdditiveSynthesis ->
             frame model AdditiveSynthesis.view
+
+        Slide.Flutes ->
+            frame model Flutes.view
 
         Slide.End ->
             frame model End.view

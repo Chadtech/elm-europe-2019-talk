@@ -1,5 +1,5 @@
 module View.Helpers exposing
-    ( additiveSynthesisHeader
+    ( header
     , line
     , words
     )
@@ -31,11 +31,11 @@ words styles content =
         [ Html.text content ]
 
 
-additiveSynthesisHeader : Html msg
-additiveSynthesisHeader =
+header : String -> Html msg
+header content =
     Grid.row
-        [ marginBottom <| px Units.size5 ]
+        []
         [ words
             [ fontSize <| px Units.size6 ]
-            "Additive Synthesis"
+            content
         ]

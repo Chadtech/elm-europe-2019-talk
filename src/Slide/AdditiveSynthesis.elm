@@ -20,17 +20,19 @@ import View.Image as Image
 
 view : List (Html Msg)
 view =
-    [ View.additiveSynthesisHeader
+    [ View.header "Additive Synthesis"
     , View.line
         []
         "The theory that all sounds are just combinations of sine waves"
     , Grid.row
         [ justifyContent center
-        , height (pct 50)
         ]
-        [ Image.view
-            [ width (pct 60) ]
-            Image.SineWaveDemo
+        [ Grid.column
+            [ flex none ]
+            [ Image.view
+                []
+                Image.SineWaveDemo
+            ]
         ]
     , Grid.row
         [ marginTop (px Units.size3)

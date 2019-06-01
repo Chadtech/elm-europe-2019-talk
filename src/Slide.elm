@@ -19,6 +19,7 @@ type Slide
     | Intro
     | Theory
     | AdditiveSynthesis
+    | Flutes
     | End
       --
     | PageDoesntExist
@@ -46,6 +47,9 @@ toRoute slide =
         AdditiveSynthesis ->
             Route.AdditiveSynthesis
 
+        Flutes ->
+            Route.Flutes
+
         End ->
             Route.End
 
@@ -70,6 +74,9 @@ fromRoute route =
 
         Route.AdditiveSynthesis ->
             AdditiveSynthesis
+
+        Route.Flutes ->
+            Flutes
 
         Route.End ->
             End
