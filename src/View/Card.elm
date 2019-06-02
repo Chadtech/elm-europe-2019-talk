@@ -269,11 +269,12 @@ headerStyle =
         |> Css.batch
 
 
-body : List (Html msg) -> Html msg
-body children =
+body : List Style -> List (Html msg) -> Html msg
+body styles children =
     Grid.row
         [ flex (int 1)
         , height (pct 100)
+        , Css.batch styles
         ]
         [ Grid.column
             [ padding (px Units.size1)

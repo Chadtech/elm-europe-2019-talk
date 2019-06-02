@@ -10,8 +10,8 @@ import Msg exposing (Msg(..))
 import Slide as Slide
 import Slide.AdditiveSynthesis as AdditiveSynthesis
 import Slide.End as End
-import Slide.Flutes as Flutes
 import Slide.Intro as Intro
+import Slide.Pipes as Pipes
 import Slide.Theory as Theory
 import Slide.Title as Title
 import Style
@@ -56,8 +56,8 @@ viewBody model =
         Slide.AdditiveSynthesis ->
             frame model AdditiveSynthesis.view
 
-        Slide.Flutes ->
-            frame model Flutes.view
+        Slide.Pipes ->
+            frame model Pipes.view
 
         Slide.End ->
             frame model End.view
@@ -65,6 +65,26 @@ viewBody model =
 
 frame : Model -> List (Html Msg) -> List (Html Msg)
 frame model children =
+    let
+        mainContent : Html Msg
+        mainContent =
+            Grid.row
+                [ flexDirection column
+                , flex (int 1)
+                ]
+                children
+
+        timeView : Html Msg
+        timeView =
+            Grid.row
+                [ marginTop <| px Units.size3 ]
+                [ Html.p
+                    [ Attrs.css
+                        [ fontSize <| px Units.size5 ]
+                    ]
+                    [ Html.text <| "time = " ++ Model.formattedTime model ]
+                ]
+    in
     [ Grid.row
         [ flexDirection column
         , justifyContent center
@@ -81,22 +101,11 @@ frame model children =
                 , flex (int 1)
                 ]
                 [ Card.body
-                    [ Grid.row
-                        [ flexDirection column ]
-                        children
-                    , timeView model
+                    []
+                    [ mainContent
+                    , timeView
                     ]
                 ]
             ]
         ]
     ]
-
-
-timeView : Model -> Html Msg
-timeView model =
-    Grid.row
-        []
-        [ Html.p
-            [ Attrs.css [ fontSize <| px Units.size5 ] ]
-            [ Html.text <| "time = " ++ Model.formattedTime model ]
-        ]

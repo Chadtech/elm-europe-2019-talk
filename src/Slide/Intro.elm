@@ -28,10 +28,12 @@ view =
         ]
     , Grid.row
         [ justifyContent center
-        , flexDirection row
+        , flex (int 1)
         ]
         [ Grid.column
-            [ flex none ]
+            [ height (pct 100)
+            , justifyContent center
+            ]
             [ Image.view
                 []
                 Image.Humio

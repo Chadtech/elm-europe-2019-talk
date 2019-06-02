@@ -23,7 +23,7 @@ type Route
     | Intro
     | Theory
     | AdditiveSynthesis
-    | Flutes
+    | Pipes
     | End
 
 
@@ -95,7 +95,7 @@ allInCorrectOrder =
     , Intro
     , Theory
     , AdditiveSynthesis
-    , Flutes
+    , Pipes
     , End
     ]
 
@@ -115,8 +115,8 @@ toUrlString route =
         AdditiveSynthesis ->
             "additive-synthesis"
 
-        Flutes ->
-            "flutes"
+        Pipes ->
+            "pipes"
 
         End ->
             "end"

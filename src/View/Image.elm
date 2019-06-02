@@ -5,6 +5,7 @@ module View.Image exposing
     )
 
 import Css exposing (..)
+import Html.Grid as Grid
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Attrs
 import Style.Units as Units
@@ -77,7 +78,10 @@ makeSummary params =
     makeSummaryHelper
         params
         { maybeCaption = Nothing
-        , styles = []
+        , styles =
+            [ height (pct 100)
+            , width auto
+            ]
         }
 
 
@@ -93,18 +97,30 @@ view params image =
             case summary.maybeCaption of
                 Just caption ->
                     View.words
-                        [ fontSize (px Units.size4) ]
+                        [ fontSize (px Units.size4)
+                        , display block
+                        ]
                         caption
 
                 Nothing ->
                     Html.text ""
     in
     Html.div
-        []
-        [ Html.img
-            [ Attrs.src <| "./" ++ toFilePathBase image ++ ".png"
-            , Attrs.css summary.styles
+        [ Attrs.css
+            [ flexDirection column
+            , displayFlex
+            , flex (int 1)
             ]
-            []
-        , captionView
+        ]
+        [ Grid.row
+            [ justifyContent center ]
+            [ Html.img
+                [ Attrs.src <| "./" ++ toFilePathBase image ++ ".png"
+                , Attrs.css summary.styles
+                ]
+                []
+            ]
+        , Grid.row
+            [ justifyContent center ]
+            [ captionView ]
         ]
