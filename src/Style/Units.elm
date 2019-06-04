@@ -13,11 +13,10 @@ module Style.Units exposing
     , size9
     )
 
-import Css exposing (..)
-
-
 {-| 2
 -}
+
+
 size0 : Float
 size0 =
     2

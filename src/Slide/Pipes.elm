@@ -23,7 +23,6 @@ view =
     [ View.header "Pipes"
     , View.line [] "Generally speaking, metal pipes produce sine waves"
     , View.line [] "one cylindrical pipe = one sine wave (ideal conditions)"
-    , View.line [] "Two clips from a recording of a flute:"
     , Grid.row
         [ marginTop (px Units.size3)
         , justifyContent center

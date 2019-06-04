@@ -19,6 +19,6 @@ view =
         [ fontSize <| px Units.size5 ]
         """
         A model for thinking and talking about sounds
-        that would make you better at handling sounds
+        that would make you better at working with sounds
         """
     ]

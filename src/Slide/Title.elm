@@ -3,7 +3,7 @@ module Slide.Title exposing (view)
 import Css exposing (fontSize, marginTop, px)
 import Html.Styled as Html exposing (Html)
 import Style.Units as Units
-import Svg.Styled.Attributes as Attrs
+import View.Helpers as View
 
 
 
@@ -14,16 +14,12 @@ import Svg.Styled.Attributes as Attrs
 
 view : List (Html msg)
 view =
-    [ Html.p
-        [ Attrs.css
-            [ fontSize (px Units.size6) ]
+    [ View.words
+        [ fontSize (px Units.size6) ]
+        "What has excited me about audio synthesis theory"
+    , View.words
+        [ fontSize (px Units.size6)
+        , marginTop (px Units.size6)
         ]
-        [ Html.text "What has excited me about audio synthesis theory" ]
-    , Html.p
-        [ Attrs.css
-            [ fontSize (px Units.size6)
-            , marginTop (px Units.size6)
-            ]
-        ]
-        [ Html.text "by Chadtech" ]
+        "by Chadtech"
     ]
