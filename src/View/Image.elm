@@ -61,7 +61,7 @@ makeSummary params =
         modifySummary param summary =
             case param of
                 Styles styles ->
-                    { summary | styles = styles ++ summary.styles }
+                    { summary | styles = summary.styles ++ styles }
 
                 Caption str ->
                     { summary | maybeCaption = Just str }

@@ -13,19 +13,12 @@ import Model exposing (Model)
 import Msg exposing (Msg(..))
 import Route exposing (Route)
 import Slide
-import Slide.AdditiveSynthesis as AdditiveSynthesis
-import Slide.End as End
-import Slide.Intro as Intro
-import Slide.Pipes as Pipes
-import Slide.Theory as Theory
-import Slide.Title as Title
 import Style
 import Style.Units as Units
 import Time
 import Url exposing (Url)
 import Util.Cmd as CmdUtil
 import View.Card as Card
-import View.Helpers as View
 
 
 
@@ -104,7 +97,7 @@ handleRoute : Maybe Route -> Model -> Model
 handleRoute maybeRoute =
     case maybeRoute of
         Nothing ->
-            Model.setSlide Slide.PageDoesntExist
+            Model.setSlide Slide.SlideDoesntExist
 
         Just route ->
             route
@@ -120,50 +113,6 @@ handleRoute maybeRoute =
 
 view : Model -> Browser.Document Msg
 view model =
-    { title = "What has excited me about audio synthesis theory"
-    , body =
-        [ Style.globals
-        , Html.audio [ Attrs.id model.audioPlayerHtmlId ] []
-        ]
-            ++ viewBody model
-            |> List.map Html.toUnstyled
-    }
-
-
-viewBody : Model -> List (Html Msg)
-viewBody model =
-    case model.slide of
-        Slide.Blank ->
-            []
-
-        Slide.PageDoesntExist ->
-            frame model
-                [ View.words
-                    []
-                    "This page does not exist"
-                ]
-
-        Slide.Title ->
-            frame model Title.view
-
-        Slide.Intro ->
-            frame model Intro.view
-
-        Slide.Theory ->
-            frame model Theory.view
-
-        Slide.AdditiveSynthesis ->
-            frame model AdditiveSynthesis.view
-
-        Slide.Pipes ->
-            frame model Pipes.view
-
-        Slide.End ->
-            frame model End.view
-
-
-frame : Model -> List (Html Msg) -> List (Html Msg)
-frame model children =
     let
         mainContent : Html Msg
         mainContent =
@@ -171,7 +120,7 @@ frame model children =
                 [ flexDirection column
                 , flex (int 1)
                 ]
-                children
+                (Slide.view model.slide)
 
         timeView : Html Msg
         timeView =
@@ -184,27 +133,36 @@ frame model children =
                     [ Html.text <| "time = " ++ Model.formattedTime model ]
                 ]
     in
-    [ Grid.row
-        [ flexDirection column
-        , justifyContent center
-        , height (pct 100)
-        , padding <| px Units.size5
-        ]
-        [ Grid.column
-            [ flex (int 1)
+    { title =
+        "What has excited me about audio synthesis theory"
+    , body =
+        [ Style.globals
+        , Html.audio
+            [ Attrs.id model.audioPlayerHtmlId ]
+            []
+        , Grid.row
+            [ flexDirection column
+            , justifyContent center
             , height (pct 100)
+            , padding <| px Units.size5
             ]
-            [ Card.view
-                [ maxWidth (px 1000)
-                , Style.center
-                , flex (int 1)
+            [ Grid.column
+                [ flex (int 1)
+                , height (pct 100)
                 ]
-                [ Card.body
-                    []
-                    [ mainContent
-                    , timeView
+                [ Card.view
+                    [ maxWidth (px 1000)
+                    , Style.center
+                    , flex (int 1)
+                    ]
+                    [ Card.body
+                        []
+                        [ mainContent
+                        , timeView
+                        ]
                     ]
                 ]
             ]
         ]
-    ]
+            |> List.map Html.toUnstyled
+    }

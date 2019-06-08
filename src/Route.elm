@@ -24,6 +24,7 @@ type Route
     | Theory
     | AdditiveSynthesis
     | Pipes
+    | Organ
     | End
 
 
@@ -96,6 +97,7 @@ allInCorrectOrder =
     , Theory
     , AdditiveSynthesis
     , Pipes
+    , Organ
     , End
     ]
 
@@ -117,6 +119,9 @@ toUrlString route =
 
         Pipes ->
             "pipes"
+
+        Organ ->
+            "organ"
 
         End ->
             "end"
