@@ -1,5 +1,6 @@
 module View.Helpers exposing
-    ( header
+    ( box
+    , header
     , line
     , words
     )
@@ -39,3 +40,8 @@ header content =
             [ fontSize <| px Units.size6 ]
             content
         ]
+
+
+box : List Style -> List (Html msg) -> Html msg
+box styles =
+    Html.div [ Attrs.css styles ]

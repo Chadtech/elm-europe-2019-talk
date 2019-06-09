@@ -27,9 +27,9 @@ type alias Model =
     }
 
 
-init : Nav.Key -> Model
-init key =
-    { slide = Slide.Blank
+init : Slide -> Nav.Key -> Model
+init slide key =
+    { slide = slide
     , audioPlayerHtmlId = "audio-player"
     , navKey = key
     , time = 0

@@ -12,7 +12,7 @@ import Json.Decode as Decode
 import Model exposing (Model)
 import Msg exposing (Msg(..))
 import Route exposing (Route)
-import Slide
+import Slide exposing (Slide)
 import Style
 import Style.Units as Units
 import Time
@@ -41,7 +41,15 @@ main =
 
 init : Decode.Value -> Url -> Nav.Key -> ( Model, Cmd Msg )
 init _ url key =
-    Model.init key
+    let
+        initialSlide : Slide
+        initialSlide =
+            url
+                |> Route.fromUrl
+                |> Maybe.map Slide.fromRoute
+                |> Maybe.withDefault Slide.SlideDoesntExist
+    in
+    Model.init initialSlide key
         |> handleRoute (Route.fromUrl url)
         |> CmdUtil.withNoCmd
 
@@ -91,6 +99,11 @@ update msg model =
             model
                 |> Model.incrementSecond
                 |> CmdUtil.withNoCmd
+
+        GoToTitleClicked ->
+            ( model
+            , Route.goTo model.navKey Route.Title
+            )
 
 
 handleRoute : Maybe Route -> Model -> Model

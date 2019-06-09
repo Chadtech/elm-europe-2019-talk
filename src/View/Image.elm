@@ -22,6 +22,12 @@ type Image
     = Humio
     | SineWaveDemo
     | FluteAudio
+    | IdealOrgan
+    | UnidealOrgan
+    | OrganPipes
+    | OrganPipeTypes
+    | PipeResonator
+    | FluteBlowSpot
 
 
 
@@ -41,6 +47,24 @@ toFilePathBase image =
 
         FluteAudio ->
             "flute-demo"
+
+        IdealOrgan ->
+            "ideal-organ"
+
+        UnidealOrgan ->
+            "unideal-organ"
+
+        OrganPipes ->
+            "actual-organ-pipes"
+
+        OrganPipeTypes ->
+            "organ-pipe-types"
+
+        PipeResonator ->
+            "organ-pipe-resonator"
+
+        FluteBlowSpot ->
+            "flute-blow-spot"
 
 
 type Param
@@ -79,8 +103,11 @@ makeSummary params =
         params
         { maybeCaption = Nothing
         , styles =
-            [ height (pct 100)
+            [ maxHeight (pct 100)
+            , maxWidth (pct 100)
+            , height auto
             , width auto
+            , display block
             ]
         }
 

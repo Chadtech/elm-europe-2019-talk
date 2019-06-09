@@ -1,6 +1,7 @@
 module Msg exposing
     ( Msg(..)
     , arrowKeyDecoder
+    , goToTitleClicked
     , playClicked
     )
 
@@ -23,11 +24,17 @@ type Msg
     | RightPressed
     | PlayClicked Audio
     | SecondElapsed
+    | GoToTitleClicked
 
 
 playClicked : Audio -> Msg
 playClicked =
     PlayClicked
+
+
+goToTitleClicked : Msg
+goToTitleClicked =
+    GoToTitleClicked
 
 
 

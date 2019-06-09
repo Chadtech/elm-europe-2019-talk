@@ -25,6 +25,8 @@ type Route
     | AdditiveSynthesis
     | Pipes
     | Organ
+    | PipesError
+    | GranularSynthesis
     | End
 
 
@@ -98,6 +100,8 @@ allInCorrectOrder =
     , AdditiveSynthesis
     , Pipes
     , Organ
+    , PipesError
+    , GranularSynthesis
     , End
     ]
 
@@ -122,6 +126,12 @@ toUrlString route =
 
         Organ ->
             "organ"
+
+        PipesError ->
+            "pipes-error"
+
+        GranularSynthesis ->
+            "granular-synthesis"
 
         End ->
             "end"
