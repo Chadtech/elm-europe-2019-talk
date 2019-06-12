@@ -24,9 +24,12 @@ type Route
     | Theory
     | AdditiveSynthesis
     | Pipes
-    | Organ
-    | PipesError
+    | Pipes__Organ
+    | Pipes__Error
     | GranularSynthesis
+    | GranularSynthesis__Diagrammed
+    | InternetVoiceChat
+    | Violin
     | End
 
 
@@ -99,9 +102,12 @@ allInCorrectOrder =
     , Theory
     , AdditiveSynthesis
     , Pipes
-    , Organ
-    , PipesError
+    , Pipes__Organ
+    , Pipes__Error
     , GranularSynthesis
+    , GranularSynthesis__Diagrammed
+    , InternetVoiceChat
+    , Violin
     , End
     ]
 
@@ -124,14 +130,23 @@ toUrlString route =
         Pipes ->
             "pipes"
 
-        Organ ->
+        Pipes__Organ ->
             "organ"
 
-        PipesError ->
+        Pipes__Error ->
             "pipes-error"
 
         GranularSynthesis ->
             "granular-synthesis"
+
+        GranularSynthesis__Diagrammed ->
+            "granular-synthesis-diagrammed"
+
+        InternetVoiceChat ->
+            "internet-voice-chat"
+
+        Violin ->
+            "violin"
 
         End ->
             "end"

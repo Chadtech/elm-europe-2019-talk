@@ -15,7 +15,13 @@ import Json.Encode as Encode
 type Audio
     = SineWaveDemo
     | IdealFlute
-    | IdealFluteSineWave
+    | IdealFlute__SineWave
+    | ElmVoice
+    | ElmVoice__E
+    | ElmVoice__L
+    | ElmVoice__M
+    | ElmVoice__Uh
+    | ElmVoice__AllTogether
 
 
 
@@ -33,8 +39,26 @@ toFilePathBase audio =
         IdealFlute ->
             "ideal-flute"
 
-        IdealFluteSineWave ->
+        IdealFlute__SineWave ->
             "flute-tone"
+
+        ElmVoice ->
+            "elm-voice"
+
+        ElmVoice__E ->
+            "elm-voice-e"
+
+        ElmVoice__M ->
+            "elm-voice-m"
+
+        ElmVoice__L ->
+            "elm-voice-l"
+
+        ElmVoice__Uh ->
+            "elm-voice-uh"
+
+        ElmVoice__AllTogether ->
+            "elm-voice-all-together"
 
 
 toFilePath : Audio -> String

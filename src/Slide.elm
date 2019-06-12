@@ -6,7 +6,7 @@ module Slide exposing
     , view
     )
 
-import Audio
+import Audio exposing (Audio)
 import Css exposing (..)
 import Html.Grid as Grid
 import Html.Styled exposing (Html)
@@ -16,7 +16,7 @@ import Route exposing (Route)
 import Style.Units as Units
 import View.Button as Button
 import View.Helpers as View
-import View.Image as Image
+import View.Image as Image exposing (Image)
 
 
 
@@ -121,16 +121,17 @@ viewRoute route =
                 []
                 [ Grid.column
                     [ flexDirection column ]
-                    [ View.line [] "I work at Humio"
+                    [ View.header "Humio"
                     , View.line [] "big and old Elm front end"
-                    , View.line [] "always kind of hiring"
-                    , View.line [] "log management tool"
-                    , View.line [] "competing against industry leaders like Splunk and Elastic Search"
+                    , View.line [] "HIRING"
+                    , View.line [] "log management platform"
+                    , View.line [] "\"Log Everything and Answer Anything\""
                     ]
                 ]
             , Grid.row
                 [ justifyContent center
                 , flex (int 1)
+                , marginTop (px Units.size3)
                 ]
                 [ Grid.column
                     [ height (pct 100)
@@ -208,18 +209,12 @@ viewRoute route =
                 [ marginTop (px Units.size3)
                 , justifyContent spaceAround
                 ]
-                [ Grid.column
-                    [ flex none ]
-                    [ Button.view
-                        [ Events.onClick <| Msg.playClicked Audio.IdealFlute ]
-                        "play actual flute recording"
-                    ]
-                , Grid.column
-                    [ flex none ]
-                    [ Button.view
-                        [ Events.onClick <| Msg.playClicked Audio.IdealFluteSineWave ]
-                        "play sine wave of the same freq "
-                    ]
+                [ buttonColumn
+                    "play actual flute recording"
+                    Audio.IdealFlute
+                , buttonColumn
+                    "play sine wave of same freq"
+                    Audio.IdealFlute__SineWave
                 ]
             , Grid.row
                 [ marginTop (px Units.size3)
@@ -235,7 +230,7 @@ viewRoute route =
                 ]
             ]
 
-        Route.Organ ->
+        Route.Pipes__Organ ->
             [ View.header "Pipes, Organs"
             , Grid.row
                 [ marginTop (px Units.size3)
@@ -267,7 +262,7 @@ viewRoute route =
                 ]
             ]
 
-        Route.PipesError ->
+        Route.Pipes__Error ->
             [ View.header "Complexity, where does it come from?"
             , View.line [] "The error is also sine waves"
             , Grid.row
@@ -319,9 +314,26 @@ viewRoute route =
             ]
 
         Route.GranularSynthesis ->
-            [ View.header "Granular Synthesis"
-            , View.line [] "Theory that all sounds are sequences of short little sound bits called 'grains'"
-            , View.line [] "a 'grain' of sound is roughly 1ms long"
+            granularSynthesis Image.ElmVoice
+
+        Route.GranularSynthesis__Diagrammed ->
+            granularSynthesis Image.ElmVoice__Diagrammed
+
+        Route.InternetVoiceChat ->
+            [ View.header "Internet Voice Chat"
+            , View.line [] "Software like skype, slack, zoom, operate on the principles of Granular theory"
+            , View.line [] "What to do if some grains are missing? Answer : just use the previous grain"
+            , View.line [] "This works because generally, the grains of a human voice, greatly resemble its neighboring grains"
+            , Image.view
+                []
+                Image.InternetVoiceChat
+            ]
+
+        Route.Violin ->
+            [ View.header "Violins"
+            , View.line [] "the actual wave form of a violin is not particularly elegant"
+            , Image.view [] Image.Violin_0
+            , Image.view [] Image.Violin_1
             ]
 
         Route.End ->
@@ -347,3 +359,47 @@ viewRoute route =
                     ]
                 ]
             ]
+
+
+granularSynthesis : Image -> List (Html Msg)
+granularSynthesis image =
+    [ View.header "Granular Synthesis"
+    , View.line [] "Theory that all sounds are sequences of short little sound bits called \"grains\""
+    , View.line [] "a \"grain\" of sound is roughly 1ms long"
+    , Grid.row
+        [ marginTop (px Units.size3)
+        , justifyContent center
+        , flex (int 1)
+        ]
+        [ Grid.column
+            [ height (pct 100) ]
+            [ Image.view
+                [ Image.Caption "My voice saying \"elm\""
+                , Image.Styles
+                    [ width (pct 100) ]
+                ]
+                image
+            ]
+        ]
+    , Grid.row
+        [ marginTop (px Units.size3)
+        , justifyContent spaceAround
+        ]
+        [ buttonColumn "\"elm\"" Audio.ElmVoice
+        , buttonColumn "\"e\"" Audio.ElmVoice__E
+        , buttonColumn "\"l\"" Audio.ElmVoice__L
+        , buttonColumn "\"m\"" Audio.ElmVoice__M
+        , buttonColumn "\"uh\"" Audio.ElmVoice__Uh
+        , buttonColumn "all together" Audio.ElmVoice__AllTogether
+        ]
+    ]
+
+
+buttonColumn : String -> Audio -> Html Msg
+buttonColumn label audio =
+    Grid.column
+        [ flex none ]
+        [ Button.view
+            [ Events.onClick <| Msg.playClicked audio ]
+            ("play " ++ label ++ "")
+        ]

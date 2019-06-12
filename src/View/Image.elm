@@ -28,6 +28,11 @@ type Image
     | OrganPipeTypes
     | PipeResonator
     | FluteBlowSpot
+    | ElmVoice
+    | ElmVoice__Diagrammed
+    | InternetVoiceChat
+    | Violin_0
+    | Violin_1
 
 
 
@@ -65,6 +70,21 @@ toFilePathBase image =
 
         FluteBlowSpot ->
             "flute-blow-spot"
+
+        ElmVoice ->
+            "elm-voice"
+
+        ElmVoice__Diagrammed ->
+            "elm-voice-diagrammed"
+
+        InternetVoiceChat ->
+            "internet-voice-chat-grains"
+
+        Violin_0 ->
+            "violin-demo-0"
+
+        Violin_1 ->
+            "violin-demo-1"
 
 
 type Param
