@@ -336,6 +336,11 @@ viewRoute route =
             , Image.view [] Image.Violin_1
             ]
 
+        Route.SnareDrum ->
+            [ View.header "Snare Drum"
+            , View.line [] "Granular synthesis isnt just about repeating grains, but sequences and transformations of grains"
+            ]
+
         Route.End ->
             [ Grid.row
                 []

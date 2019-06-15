@@ -30,6 +30,7 @@ type Route
     | GranularSynthesis__Diagrammed
     | InternetVoiceChat
     | Violin
+    | SnareDrum
     | End
 
 
@@ -108,6 +109,7 @@ allInCorrectOrder =
     , GranularSynthesis__Diagrammed
     , InternetVoiceChat
     , Violin
+    , SnareDrum
     , End
     ]
 
@@ -147,6 +149,9 @@ toUrlString route =
 
         Violin ->
             "violin"
+
+        SnareDrum ->
+            "snare-drum"
 
         End ->
             "end"
