@@ -313,6 +313,12 @@ viewRoute route =
                 ]
             ]
 
+        Route.Horns ->
+            []
+
+        Route.Bars ->
+            []
+
         Route.GranularSynthesis ->
             granularSynthesis Image.ElmVoice
 

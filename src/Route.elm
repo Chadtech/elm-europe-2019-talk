@@ -26,6 +26,8 @@ type Route
     | Pipes
     | Pipes__Organ
     | Pipes__Error
+    | Horns
+    | Bars
     | GranularSynthesis
     | GranularSynthesis__Diagrammed
     | InternetVoiceChat
@@ -105,6 +107,8 @@ allInCorrectOrder =
     , Pipes
     , Pipes__Organ
     , Pipes__Error
+    , Horns
+    , Bars
     , GranularSynthesis
     , GranularSynthesis__Diagrammed
     , InternetVoiceChat
@@ -137,6 +141,12 @@ toUrlString route =
 
         Pipes__Error ->
             "pipes-error"
+
+        Horns ->
+            "horns"
+
+        Bars ->
+            "bars"
 
         GranularSynthesis ->
             "granular-synthesis"
