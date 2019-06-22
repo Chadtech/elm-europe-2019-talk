@@ -28,6 +28,7 @@ type Image
     | OrganPipeTypes
     | PipeResonator
     | FluteBlowSpot
+    | Horn
     | ElmVoice
     | ElmVoice__Diagrammed
     | InternetVoiceChat
@@ -70,6 +71,9 @@ toFilePathBase image =
 
         FluteBlowSpot ->
             "flute-blow-spot"
+
+        Horn ->
+            "horn"
 
         ElmVoice ->
             "elm-voice"

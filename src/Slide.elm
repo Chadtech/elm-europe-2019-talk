@@ -314,7 +314,24 @@ viewRoute route =
             ]
 
         Route.Horns ->
-            []
+            [ View.header "Horns"
+            , Grid.row
+                []
+                [ Grid.column
+                    []
+                    [ Image.view
+                        [ Image.Styles
+                            [ maxHeight (px 300) ]
+                        ]
+                        Image.Horn
+                    ]
+                ]
+            , View.line [] "Cylindrical pipe"
+            , View.line [] "-> one sine wave (100 hz)"
+            , View.line [] "------"
+            , View.line [] "Pipe with a horn at the end"
+            , View.line [] "-> many sine waves that are all multiples of one base frequency (100hz, 200hz, 300hz, etc)"
+            ]
 
         Route.Bars ->
             []
