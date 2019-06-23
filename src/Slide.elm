@@ -188,7 +188,7 @@ viewRoute route =
             ]
 
         Route.Pipes ->
-            [ View.header "Pipes"
+            [ View.header "pipes"
             , View.line [] "one cylindrical pipe = one sine wave"
             , Grid.row
                 [ marginTop (px Units.size3)
@@ -231,7 +231,7 @@ viewRoute route =
             ]
 
         Route.Pipes__Organ ->
-            [ View.header "Pipes, Organs"
+            [ View.header "pipes, organs"
             , Grid.row
                 [ marginTop (px Units.size3)
                 , justifyContent center
@@ -263,7 +263,7 @@ viewRoute route =
             ]
 
         Route.Pipes__Error ->
-            [ View.header "Complexity, where does it come from?"
+            [ View.header "complexity, where does it come from?"
             , View.line [] "The error is also sine waves"
             , Grid.row
                 [ marginTop (px Units.size3)
@@ -314,7 +314,7 @@ viewRoute route =
             ]
 
         Route.Horns ->
-            [ View.header "Horns"
+            [ View.header "horns"
             , Grid.row
                 []
                 [ Grid.column
@@ -326,15 +326,35 @@ viewRoute route =
                         Image.Horn
                     ]
                 ]
-            , View.line [] "Cylindrical pipe"
+            , View.line [] "cylindrical pipe"
             , View.line [] "-> one sine wave (100 hz)"
             , View.line [] "------"
-            , View.line [] "Pipe with a horn at the end"
+            , View.line [] "pipe with a horn at the end"
             , View.line [] "-> many sine waves that are all multiples of one base frequency (100hz, 200hz, 300hz, etc)"
             ]
 
         Route.Bars ->
-            []
+            [ View.header "percussion"
+            , Grid.row
+                []
+                [ Grid.column
+                    [ displayFlex
+                    , flexDirection column
+                    ]
+                    [ View.line [] "rectangle"
+                    , View.line [] "-> one sine wave"
+                    , Image.view [] Image.Xylophone
+                    ]
+                , Grid.column
+                    [ displayFlex
+                    , flexDirection column
+                    ]
+                    [ View.line [] "weird shape"
+                    , View.line [] "-> many sine waves"
+                    , Image.view [] Image.Bell
+                    ]
+                ]
+            ]
 
         Route.GranularSynthesis ->
             granularSynthesis Image.ElmVoice
@@ -343,7 +363,7 @@ viewRoute route =
             granularSynthesis Image.ElmVoice__Diagrammed
 
         Route.InternetVoiceChat ->
-            [ View.header "Internet Voice Chat"
+            [ View.header "internet voice chat"
             , View.line [] "Software like skype, slack, zoom, operate on the principles of Granular theory"
             , View.line [] "What to do if some grains are missing? Answer : just use the previous grain"
             , View.line [] "This works because generally, the grains of a human voice, greatly resemble its neighboring grains"
@@ -353,16 +373,41 @@ viewRoute route =
             ]
 
         Route.Violin ->
-            [ View.header "Violins"
+            [ View.header "violins"
             , View.line [] "the actual wave form of a violin is not particularly elegant"
             , Image.view [] Image.Violin_0
             , Image.view [] Image.Violin_1
             ]
 
         Route.SnareDrum ->
-            [ View.header "Snare Drum"
-            , View.line [] "Granular synthesis isnt just about repeating grains, but sequences and transformations of grains"
-            ]
+            percussion
+                [ View.line [] "Transform and sequence grains"
+                , View.line [] "grains can represent physical motion in small time scales"
+                , View.line [] "the \"grain\" of a drum stick impact:"
+                , Image.view [] Image.SnareDrum__Punch
+                ]
+
+        Route.SnareDrum__TopHead ->
+            percussion
+                [ View.line [] "the \"grain\" of the drum head shaking:"
+                , Image.view [] Image.SnareDrum__TopHead
+                ]
+
+        Route.SnareDrum__Travel ->
+            percussion
+                [ View.line [] "the \"grain\" of sound traveling from the top head to the bottom head of the drum:"
+                , View.line [] "A spike, for the sound pressure that goes directly, and then a lump as sound bounces off the walls too"
+                , Image.view [] Image.SnareDrum__Travel
+                ]
+
+        Route.SnareDrum__BottomHead ->
+            percussion
+                [ View.line [] "the \"grain\" of the bottom drum head shaking:"
+                , Image.view [] Image.SnareDrum__BottomHead
+                ]
+
+        Route.SnareDrum__Snare ->
+            percussion []
 
         Route.End ->
             [ Grid.row
@@ -387,6 +432,11 @@ viewRoute route =
                     ]
                 ]
             ]
+
+
+percussion : List (Html Msg) -> List (Html Msg)
+percussion =
+    (::) (View.header "snare drum")
 
 
 granularSynthesis : Image -> List (Html Msg)

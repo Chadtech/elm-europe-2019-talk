@@ -33,6 +33,10 @@ type Route
     | InternetVoiceChat
     | Violin
     | SnareDrum
+    | SnareDrum__TopHead
+    | SnareDrum__Travel
+    | SnareDrum__BottomHead
+    | SnareDrum__Snare
     | End
 
 
@@ -114,6 +118,10 @@ allInCorrectOrder =
     , InternetVoiceChat
     , Violin
     , SnareDrum
+    , SnareDrum__TopHead
+    , SnareDrum__Travel
+    , SnareDrum__BottomHead
+    , SnareDrum__Snare
     , End
     ]
 
@@ -162,6 +170,18 @@ toUrlString route =
 
         SnareDrum ->
             "snare-drum"
+
+        SnareDrum__TopHead ->
+            "snare-drum-top-head"
+
+        SnareDrum__Travel ->
+            "snare-drum-travel"
+
+        SnareDrum__BottomHead ->
+            "snare-drum-bottom-head"
+
+        SnareDrum__Snare ->
+            "snare-drum-snare"
 
         End ->
             "end"

@@ -29,11 +29,18 @@ type Image
     | PipeResonator
     | FluteBlowSpot
     | Horn
+    | Xylophone
+    | Bell
     | ElmVoice
     | ElmVoice__Diagrammed
     | InternetVoiceChat
     | Violin_0
     | Violin_1
+    | SnareDrum__Punch
+    | SnareDrum__TopHead
+    | SnareDrum__Travel
+    | SnareDrum__BottomHead
+    | SnareDrum__Snare
 
 
 
@@ -75,6 +82,12 @@ toFilePathBase image =
         Horn ->
             "horn"
 
+        Xylophone ->
+            "xylophone"
+
+        Bell ->
+            "bell"
+
         ElmVoice ->
             "elm-voice"
 
@@ -89,6 +102,26 @@ toFilePathBase image =
 
         Violin_1 ->
             "violin-demo-1"
+
+        SnareDrum__Punch ->
+            snareDrum "punch"
+
+        SnareDrum__TopHead ->
+            "snare-drum-top-head"
+
+        SnareDrum__Travel ->
+            "snare-drum-travel"
+
+        SnareDrum__BottomHead ->
+            "snare-drum-bottom-head"
+
+        SnareDrum__Snare ->
+            "snare-drum-snares"
+
+
+snareDrum : String -> String
+snareDrum =
+    (++) "snare-drum-"
 
 
 type Param
