@@ -37,6 +37,7 @@ type Route
     | SnareDrum__Travel
     | SnareDrum__BottomHead
     | SnareDrum__Snare
+    | SnareDrum__Synthesis
     | End
 
 
@@ -122,6 +123,7 @@ allInCorrectOrder =
     , SnareDrum__Travel
     , SnareDrum__BottomHead
     , SnareDrum__Snare
+    , SnareDrum__Synthesis
     , End
     ]
 
@@ -182,6 +184,9 @@ toUrlString route =
 
         SnareDrum__Snare ->
             "snare-drum-snare"
+
+        SnareDrum__Synthesis ->
+            "snare-drum-synthesis"
 
         End ->
             "end"

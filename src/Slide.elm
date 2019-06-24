@@ -210,10 +210,10 @@ viewRoute route =
                 , justifyContent spaceAround
                 ]
                 [ buttonColumn
-                    "play actual flute recording"
+                    "actual flute recording"
                     Audio.IdealFlute
                 , buttonColumn
-                    "play sine wave of same freq"
+                    "sine wave of same freq"
                     Audio.IdealFlute__SineWave
                 ]
             , Grid.row
@@ -396,7 +396,7 @@ viewRoute route =
         Route.SnareDrum__Travel ->
             percussion
                 [ View.line [] "the \"grain\" of sound traveling from the top head to the bottom head of the drum:"
-                , View.line [] "A spike, for the sound pressure that goes directly, and then a lump as sound bounces off the walls too"
+                , View.line [] "A spike, for the sound pressure that goes directly, and then a lump as sound bounces off the walls of the drum too"
                 , Image.view [] Image.SnareDrum__Travel
                 ]
 
@@ -407,7 +407,20 @@ viewRoute route =
                 ]
 
         Route.SnareDrum__Snare ->
-            percussion []
+            percussion
+                [ View.line [] "the \"grain\" of the bottom drum head rattling up against the metal snares:"
+                , Image.view [] Image.SnareDrum__Snare
+                ]
+
+        Route.SnareDrum__Synthesis ->
+            percussion
+                [ Grid.row
+                    []
+                    [ buttonColumn "real marching band snare" Audio.ActualSnareDrum ]
+                , Grid.row
+                    [ marginTop (px <| Units.size3) ]
+                    [ buttonColumn "synthesized snare drum" Audio.SynthesizedSnareDrum ]
+                ]
 
         Route.End ->
             [ Grid.row

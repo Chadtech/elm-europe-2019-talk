@@ -22,6 +22,8 @@ type Audio
     | ElmVoice__M
     | ElmVoice__Uh
     | ElmVoice__AllTogether
+    | ActualSnareDrum
+    | SynthesizedSnareDrum
 
 
 
@@ -59,6 +61,12 @@ toFilePathBase audio =
 
         ElmVoice__AllTogether ->
             "elm-voice-all-together"
+
+        ActualSnareDrum ->
+            "marching-snare-drum"
+
+        SynthesizedSnareDrum ->
+            "elm-europe-snare-final"
 
 
 toFilePath : Audio -> String
