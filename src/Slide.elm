@@ -321,7 +321,7 @@ viewRoute route =
                     []
                     [ Image.view
                         [ Image.Styles
-                            [ maxHeight (px 300) ]
+                            [ height (px 150) ]
                         ]
                         Image.Horn
                     ]
